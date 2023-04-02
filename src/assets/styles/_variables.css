@@ -1,0 +1,22 @@
+:root {
+  --white: #ffffff;
+}
+
+[data-theme='dark'] {
+  --page-bg-color: #1A1A1A;
+  --primary: #FFFFFF;
+  --secondary: #FFFFFFDE;
+  /*--secondary: #EBEBEB99;*/
+  --border: rgb(93 88 88);
+  --active-color: #3fb883;
+  --theme-icon-color: #FFE15D
+}
+
+[data-theme='light'] {
+  --page-bg-color: #F5F5F5;
+  --primary: #212121;
+  --secondary: #3C3C3C;
+  --border: #DADADA;
+  --active-color: #636cff;
+  --theme-icon-color: #66347F
+}
