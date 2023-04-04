@@ -19,7 +19,7 @@
          <Table :columns="columns" :data="dummyData.shipments">
             <template #actions="{data}">
                <div class="actions">
-                  <span class="detail">
+                  <span class="detail" @click="showDetail(data)">
                      <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
                   </span>
                   <span class="remove">
@@ -134,6 +134,10 @@ const totalProfit = computed(() => {
    }, 0)
    return `${formatUsd(total)}`
 });
+
+const showDetail = (shipment) => {
+   router.push({name: 'DetailShipment', params: {id: shipment.id}})
+}
 </script>
 
 <style scoped lang="scss">
