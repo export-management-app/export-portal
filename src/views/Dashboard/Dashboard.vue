@@ -23,7 +23,8 @@ import Summary from "@/components/Summary.vue";
       margin-top: 1.5rem;
       border: 1px solid var(--border);
       border-radius: .5rem;
-      padding: 0.8rem 1rem;
+      padding: 2rem 1.5rem;
+      background: var(--content-bg);
    }
 }
 </style>

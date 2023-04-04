@@ -1,7 +1,7 @@
 <template>
    <div class="app-container">
       <div class="navbar">
-         <Navbar />
+         <Navbar :links="links" />
       </div>
       <div class="router-view">
          <router-view />
@@ -11,6 +11,23 @@
 
 <script setup>
 import Navbar from "@/Layout/Navbar/Navbar.vue";
+
+const links = [
+   {
+      id: 'dashboard',
+      name: 'Dashboard',
+      title: 'Ana sayfa',
+      icon: 'gauge-high',
+      disabled: false,
+   },
+   {
+      id: 'exports',
+      name: 'Shipments',
+      title: 'Nakliyeler',
+      icon: 'truck',
+      disabled: false,
+   },
+]
 </script>
 
 <style scoped lang="scss">

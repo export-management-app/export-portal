@@ -5,7 +5,7 @@
          <font-awesome-icon class="logo" icon="fa-solid fa-truck-fast" />
       </span>
       <div class="links">
-         <span class="link" :class="{ 'disabled' : link.disabled, 'active' : route.name === link.name }" v-for="link in links" :key="link.id" @click="router.push({name: link.name})">
+         <span class="link" v-for="link in props.links" :class="{ 'disabled' : link.disabled, 'active' : route.name === link.name }" :key="link.id" @click="router.push({name: link.name})">
             <font-awesome-icon :icon="`fa-solid fa-${link.icon}`" />
             <span class="link__title">{{link.title}}</span>
          </span>
@@ -21,7 +21,6 @@
 </template>
 
 <script setup>
-import { reactive } from 'vue'
 import { useRouter, useRoute } from "vue-router";
 import { useDark, useToggle } from "@vueuse/core";
 
@@ -36,22 +35,7 @@ const isDark = useDark({
 });
 const toggleDark = useToggle(isDark)
 
-const links = reactive([
-   {
-      id: 'dashboard',
-      name: 'Dashboard',
-      title: 'Ana sayfa',
-      icon: 'gauge-high',
-      disabled: false,
-   },
-   {
-      id: 'shipments',
-      name: 'Shipments',
-      title: 'Nakliyeler',
-      icon: 'truck',
-      disabled: false,
-   },
-])
+const props = defineProps(['links'])
 
 </script>
 

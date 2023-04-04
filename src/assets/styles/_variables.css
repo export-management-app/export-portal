@@ -1,12 +1,15 @@
 :root {
   --white: #ffffff;
+  --danger: #E21818;
+  --green: #3fb883
 }
 
 [data-theme='dark'] {
   --page-bg-color: #1A1A1A;
+  --content-bg: #1f1e1e;
   --primary: #FFFFFF;
   --secondary: #FFFFFFDE;
-  /*--secondary: #EBEBEB99;*/
+  --hover: #3C3C3C;
   --border: rgb(93 88 88);
   --active-color: #3fb883;
   --theme-icon-color: #FFE15D
@@ -14,8 +17,10 @@
 
 [data-theme='light'] {
   --page-bg-color: #F5F5F5;
+  --content-bg: #ffffff;
   --primary: #212121;
   --secondary: #3C3C3C;
+  --hover: #DAF5FF;
   --border: #DADADA;
   --active-color: #636cff;
   --theme-icon-color: #66347F
