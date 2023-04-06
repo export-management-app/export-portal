@@ -5,4 +5,8 @@ const formatUsd = (number) => {
    }).format(number).replace('$', '$ ');
 }
 
-export { formatUsd }
+const setToken = (key, value) => {
+   document.cookie = `${key}=${value}`
+}
+
+export { formatUsd, setToken }

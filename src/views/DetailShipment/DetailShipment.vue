@@ -2,10 +2,7 @@
    Detail Shipments
 </template>
 
-<script>
-export default {
-   name: "DetailShipment"
-}
+<script setup>
 </script>
 
 <style scoped>

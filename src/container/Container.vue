@@ -11,6 +11,9 @@
 
 <script setup>
 import Navbar from "@/Layout/Navbar/Navbar.vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
 
 const links = [
    {

@@ -6,8 +6,8 @@
                Nakliyeler
                <span class="separator" />
                <button class="add-new-btn" @click="router.push({name: 'AddShipment'})">
-               Yeni Ekle
-            </button>
+                  Yeni Ekle
+               </button>
             </span>
             <small class="description">{{`Toplam ${dummyData.shipments.length} Nakliye`}}</small>
          </div>

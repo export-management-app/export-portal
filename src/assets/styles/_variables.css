@@ -1,7 +1,8 @@
 :root {
   --white: #ffffff;
   --danger: #E21818;
-  --green: #3fb883
+  --green: #3fb883;
+  --purple: #66347F
 }
 
 [data-theme='dark'] {

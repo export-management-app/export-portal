@@ -1,10 +1,10 @@
 <template>
-<header class="navbar">
+<header class="navbar" :class="{ 'border' : checkNavbar }">
    <div class="navbar__left">
-      <span @click="router.push({name: 'Dashboard'})">
+      <span @click="router.push({name: 'Dashboard'})" v-if="checkNavbar">
          <font-awesome-icon class="logo" icon="fa-solid fa-truck-fast" />
       </span>
-      <div class="links">
+      <div class="links" v-if="checkNavbar">
          <span class="link" v-for="link in props.links" :class="{ 'disabled' : link.disabled, 'active' : route.name === link.name }" :key="link.id" @click="router.push({name: link.name})">
             <font-awesome-icon :icon="`fa-solid fa-${link.icon}`" />
             <span class="link__title">{{link.title}}</span>
@@ -12,20 +12,38 @@
       </div>
    </div>
    <div class="navbar__right">
-      <i class="bi bi-cloud-moon-fill"></i>
       <span @click="toggleDark()" class="theme">
          <font-awesome-icon :class="[isDark ? 'sun' : 'moon']" :icon="`fa-solid fa-${isDark ? 'sun' : 'moon'}`" />
+      </span>
+      <span @click="handleSignOut" class="sign-out" v-if="checkNavbar">
+         <font-awesome-icon icon="fa-solid fa-right-from-bracket" />
       </span>
    </div>
 </header>
 </template>
 
 <script setup>
+import {computed, onMounted, ref} from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { useDark, useToggle } from "@vueuse/core";
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth'
+
+const props = defineProps(['links'])
 
 const router = useRouter()
 const route = useRoute();
+
+const checkNavbar = computed(() => {
+   let isValid;
+   if(route.name === 'Login') {
+      isValid = false;
+   } else if(!!route.meta.notFound) {
+      isValid = false;
+   } else {
+      isValid = true;
+   }
+   return isValid
+})
 
 const isDark = useDark({
    selector: "body",
@@ -33,9 +51,26 @@ const isDark = useDark({
    valueDark: "dark",
    valueLight: "light"
 });
+
 const toggleDark = useToggle(isDark)
 
-const props = defineProps(['links'])
+const isLoggedIn = ref(false);
+
+let auth;
+onMounted(() => {
+   auth = getAuth();
+   onAuthStateChanged(auth, (user) => {
+      isLoggedIn.value = !!user
+   })
+})
+
+async function handleSignOut() {
+   signOut(auth).then(() => {
+      router.push({name: 'Login'})
+   })
+}
+
+
 
 </script>
 
@@ -45,7 +80,9 @@ const props = defineProps(['links'])
    justify-content: space-between;
    align-items: center;
    padding: 1.3rem clamp(3vw, 100%, (100vw - 1652px) / 2);
-   border-bottom: 1px solid var(--border);
+   .border {
+      border-bottom: 1px solid var(--border);
+   }
    &__left {
       display: flex;
       align-items: center;
@@ -92,10 +129,16 @@ const props = defineProps(['links'])
    &__right {
       display: flex;
       align-items: center;
-      gap: 2rem;
+      gap: 1.5rem;
       & .theme {
          cursor: pointer;
          color: var(--theme-icon-color)
+      }
+      & .sign-out {
+         cursor: pointer;
+         &:hover {
+            color: var(--active-color);
+         }
       }
    }
 }
