@@ -79,8 +79,8 @@ router.beforeEach(async (to,from, next) => {
       if(await getCurrentUser()) {
          next()
       } else {
-         alert("Yetkisiz işlem")
          next('/login');
+         console.error('Yetkisiz islem')
       }
    } else {
       next();
